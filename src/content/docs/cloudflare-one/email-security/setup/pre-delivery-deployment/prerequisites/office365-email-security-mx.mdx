@@ -1,13 +1,13 @@
 ---
 title: Office 365 as MX Record
-pcx_content_type: concept
+pcx_content_type: integration-guide
 sidebar:
   order: 3
 ---
 
 In this tutorial, you will learn how to configure Microsoft Office 365 with Email Security as its MX record. 
 
-## Add Email Security IP addresses to Allow List
+## 1. Add Email Security IP addresses to Allow List
 
 1. Go to the [Anti-spam policies page](https://security.microsoft.com/antispam) > Select **Edit connection filter policy**.
 2. In **Always allow messages from the following IP addresses or address range**, add IP addresses and CIDR blocks mentioned in Egress IPs.
@@ -18,7 +18,7 @@ In this tutorial, you will learn how to configure Microsoft Office 365 with Emai
     - Select **[Edit spam threshold and properties](https://learn.microsoft.com/en-us/defender-office-365/anti-spam-bulk-complaint-level-bcl-about)** > **Mark as spam** > **SPF record: hard fail**, and ensure it is set to **Off**.
 5. Select **Save**.
 
-## Enhanced Filtering configuration
+## 2. Enhanced Filtering configuration
 
 ### Create an inbound connector
 
@@ -38,5 +38,7 @@ Now that the inbound connector has been configured, you will need to enable the 
 1. Go to the [Security admin console](https://security.microsoft.com/homepage), and [enable enhanced filtering](https://learn.microsoft.com/en-us/exchange/mail-flow-best-practices/use-connectors-to-configure-mail-flow/enhanced-filtering-for-connectors#use-the-microsoft-defender-portal-to-configure-enhanced-filtering-for-connectors-on-an-inbound-connector).
 2. Select **Automatically detect and skip the last IP address** and **Apply to entire organization**.
 3. Select **Save**.
+
+## Next steps
 
 Now that you have completed the prerequisite steps, you can set up [MX/Inline](/cloudflare-one/email-security/setup/pre-delivery-deployment/inline-deployment-setup/) on the Cloudflare dashboard.
