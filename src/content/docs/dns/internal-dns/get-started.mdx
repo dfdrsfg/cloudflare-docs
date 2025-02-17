@@ -65,9 +65,12 @@ TBD > add full API call example using IDs mentioned above
 
 ## 2. Link your internal zone to a view
 
-Since the resolver policy will require a view ID, a minimum of one view per account is required.
+Since the resolver policy will require a view ID, you must have at least one view to be able to route requests to Internal DNS.
 
-1. Use the XYZ endpoint to create a view. For each view you create, list all the internal zones that should be grouped under that view.
+1. Use the [Create Internal DNS View](/api/resources/dns/subresources/settings/subresources/views/methods/create/) endpoint to create a view. For each view you create, list all the internal zones that should be grouped under that view.
+<Details header="DNS view requirements">
+TBD > add partial with requirements from Setup page
+</Details>
 
 ## 3. Configure Gateway policies
 
