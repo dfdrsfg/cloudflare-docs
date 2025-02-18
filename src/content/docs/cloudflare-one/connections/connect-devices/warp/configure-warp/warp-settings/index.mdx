@@ -330,6 +330,6 @@ To turn on local network access in the WARP client:
 
 </Details>
 
-When `Enabled` (default), the operating system will register WARP's [local interface IP](#override-local-interface-ip) (CGNAT IP or `172.16.0.2`) with your on-premises DNS server when the DNS server is reachable.
+When `Enabled` (default), the operating system will register WARP's [local interface IP](#override-local-interface-ip) (CGNAT IP or `172.16.0.2`) with your on-premise DNS server when the DNS server is reachable.
 
-If you use on-prem DNS infrastructure (such as Active Directory), we recommend turning this setting on for remote [device profiles](/cloudflare-one/connections/connect-devices/warp/configure-warp/device-profiles/) and turning it off for [managed network](/cloudflare-one/connections/connect-devices/warp/configure-warp/managed-networks/) device profiles. In this configuration, remote devices will register their WARP interface IP, while on-prem devices will only register their local DHCP address. This allows the on-prem DNS server to resolve device hostnames no matter where the device is located.
+If you use on-premise DNS infrastructure (such as Active Directory), we recommend turning this setting on for remote [device profiles](/cloudflare-one/connections/connect-devices/warp/configure-warp/device-profiles/) and turning it off for [managed network](/cloudflare-one/connections/connect-devices/warp/configure-warp/managed-networks/) device profiles. In this configuration, remote devices will register their WARP interface IP, while on-premise devices will only register their local DHCP address. This allows the on-premise DNS server to resolve device hostnames no matter where the device is located.
