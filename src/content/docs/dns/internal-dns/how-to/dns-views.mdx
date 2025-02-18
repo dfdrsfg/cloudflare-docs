@@ -6,15 +6,13 @@ sidebar:
   label: Views
 ---
 
-intro
+import { Details } from "~/components";
 
-### Linked internal zones
+Internal DNS views are logical groupings of [internal DNS zones](/dns/internal-dns/how-to/internal-zones/). As explained in the [architecture overview](/dns/internal-dns/#architecture-overview), DNS views are referenced by [Gateway resolver policies](/cloudflare-one/policies/gateway/resolver-policies/) to define how a specific query should be resolved.
 
-### Reference by resolver policies
+Refer to the sections below for details on how to manage your DNS views, or consider the [get started](/dns/internal-dns/#architecture-overview) for the complete workflow.
 
-## Setup
-
-### Configuration conditions
+## Configuration conditions
 
 When setting up DNS views, observe the following conditions:
 
@@ -22,12 +20,22 @@ When setting up DNS views, observe the following conditions:
 - A DNS view cannot contain public DNS zones[^1].
 - Each internal DNS zone name must be unique within a given DNS view.
 
-### Create a view
+## Create a view
 
-### Delete a view
+Use the [Create Internal DNS View](/api/resources/dns/subresources/settings/subresources/views/methods/create/) endpoint. For each view you create, list all the internal zones that should be grouped under that view.
+
+## Delete a view
+
+Use the [Delete Internal DNS View](/api/resources/dns/subresources/settings/subresources/views/methods/delete/) endpoint
 
 DNS views can be deleted even if they still have internal zones linked to them. The internal DNS zones will continue to exist but will be unlinked once the view is deleted.
 
 It is also possible to delete a DNS view that is being referenced by a Gateway resolver policy. In this case, queries matching the policy will return `NXDOMAIN`.
+
+## Other actions
+
+- [Update a DNS view](/api/resources/dns/subresources/settings/subresources/views/methods/edit/) (`PATCH`)
+- [Get view details](/api/resources/dns/subresources/settings/subresources/views/methods/get/) (`GET`)
+- [List DNS views](/api/resources/dns/subresources/settings/subresources/views/methods/list/) (`GET`)
 
 [^1]: DNS zones that contain public DNS records and are accessible by public resolvers.
