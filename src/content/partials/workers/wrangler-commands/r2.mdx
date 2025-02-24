@@ -353,10 +353,12 @@ wrangler r2 bucket lock add <NAME> [OPTIONS]
   - A unique identifier for the bucket lock rule.
 - `--prefix` <Type text="string" /> <MetaInfo text="optional" />
   - Prefix condition for the bucket lock rule (leave empty for all prefixes).
-- `--lock-days` <Type text="number" /> <MetaInfo text="optional" />
-  - Sets the number of days to lock objects for. Note you can provide only one of `--lock-days` or `--lock-date`.
-- `--lock-date` <Type text="string" /> <MetaInfo text="optional" />
-  - Sets the date (YYYY-MM-DD) until which objects will be locked for. Note you can provide only one of `--lock-days` or `--lock-date`.
+- `--retention-days` <Type text="number" /> <MetaInfo text="optional" />
+  - Sets the number of days to retain objects for. Note you can provide only one of `--retention-days`, `--retention-date`, or `--retention-indefinite`.
+- `--retention-date` <Type text="string" /> <MetaInfo text="optional" />
+  - Sets the number of days to retain objects for. Note you can provide only one of `--retention-days`, `--retention-date`, or `--retention-indefinite`.
+- `--retention-indefinite` <Type text="string" /> <MetaInfo text="optional" />
+  - Sets the retention period to indefinite — meaning the lock will remain in place until explicitly removed. Note you can provide only one of `--retention-days`, `--retention-date`, or `--retention-indefinite`.
 - `--jurisdiction` <Type text="string" /> <MetaInfo text="optional" />
   - The jurisdiction where the bucket exists, if a jurisdiction has been specified. Refer to [jurisdictional restrictions](/r2/reference/data-location/#jurisdictional-restrictions).
 - `--force` <Type text="boolean" /> <MetaInfo text="optional" />
