@@ -1,0 +1,19 @@
+---
+pcx_content_type: how-to
+title: Generate PDF
+sidebar:
+  order: 5
+---
+
+```
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/pdf' \
+  -H 'Authorization: Bearer <apiToken>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "url": "https://example.com/",
+    "addStyleTag": [
+      { "content": "body { font-family: Arial; }" }
+    ]
+  }' \
+  --output "output.pdf"
+```

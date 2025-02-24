@@ -1,0 +1,22 @@
+---
+pcx_content_type: how-to
+title: Render HTML and capture screenshot
+sidebar:
+  order: 3
+---
+
+Render a provided HTML string and capture a screenshot with specific options.
+
+```
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/screenshot' \
+  -H 'Authorization: Bearer <apiToken>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "html": "Hello World!",
+    "screenshotOptions": {
+      "type": "webp",
+      "omitBackground": true
+    }
+  }' \
+  --output "screenshot.webp"
+```

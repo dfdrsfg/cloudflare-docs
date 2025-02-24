@@ -1,0 +1,18 @@
+---
+pcx_content_type: how-to
+title: Capture snapshot
+sidebar:
+  order: 6
+---
+
+```
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/snapshot' \
+  -H 'Authorization: Bearer <apiToken>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "url": "https://example.com/",
+    "addScriptTag": [
+      { "content": "document.title = \"Snapshot Page\";" }
+    ]
+  }'
+```

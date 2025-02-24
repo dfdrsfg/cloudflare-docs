@@ -1,0 +1,15 @@
+---
+pcx_content_type: how-to
+title: Retrieve HTML content
+sidebar:
+  order: 2
+---
+
+Retrieve the HTML content of a specified URL by sending a POST request to the `/content` endpoint.
+
+```
+curl -X 'POST' 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/content' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer <apiToken>' \
+  -d '{"url": "https://example.com"}'
+```

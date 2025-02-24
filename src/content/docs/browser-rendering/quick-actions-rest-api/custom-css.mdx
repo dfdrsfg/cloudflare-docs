@@ -1,0 +1,30 @@
+---
+pcx_content_type: how-to
+title: Customize CSS and take a screenshot
+sidebar:
+  order: 4
+---
+
+Customise the rendering by adding external JavaScript and CSS before capturing a screenshot.
+
+```
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/screenshot' \
+  -H 'Authorization: Bearer <apiToken>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "url": "https://example.com/",
+    "addScriptTag": [
+      { "url": "https://code.jquery.com/jquery-3.7.1.min.js" },
+      { "content": "document.querySelector(`h1`).innerText = `Hello World!!!`" }
+    ],
+    "addStyleTag": [
+      {
+        "content": "body { background: linear-gradient(45deg, #da5a44, #a32784); }"
+      },
+      {
+        "url": "https://interactive-examples.mdn.mozilla.net/live-examples/css-examples/text-decoration/text-decoration-color.css"
+      }
+    ]
+  }' \
+  --output "screenshot.webp"
+```
