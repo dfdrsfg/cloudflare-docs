@@ -5,6 +5,22 @@ productLink: "/hyperdrive/"
 productArea: Developer platform
 productAreaLink: /workers/platform/changelog/platform/
 entries:
+  - publish_date: "2025-02-26"
+    title: Hyperdrive egresses using Cloudflare's IP address ranges
+    description: |-
+      Hyperdrive now connects to your databases using [Cloudflare's IP address ranges]((https://www.cloudflare.com/ips/). 
+
+      This enables you to configure the firewall policies on your database to allow access to this limited IP address range. 
+
+      Refer to the [full list of Cloudflare IP ranges](https://www.cloudflare.com/ips/) that Hyperdrive uses.
+  - publish_date: "2025-02-25"
+    title: Hyperdrive improves connection pool placement decreasing query latency by up to 50%
+    description: |-
+      Hyperdrive now pools all database connections in one or more regions as close to your database as possible. This means that you uncached queries resolve faster by up to 50%.
+
+      In aggregate, we observed a decrease on average of \<ENTER NUMBER\>.
+
+      Refer to [documentation on how Hyperdrive caches query results](/hyperdrive/configuration/how-hyperdrive-works/#query-caching).
   - publish_date: "2025-01-28"
     title: Hyperdrive automatically configures your Cloudflare Tunnel to connect to your private database.
     description: |-
