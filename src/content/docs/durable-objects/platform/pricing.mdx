@@ -118,3 +118,9 @@ In this scenario, the estimated monthly cost would be calculated as:
 ## Storage API billing
 
 <Render file="storage_api_pricing" product="workers" />
+
+:::caution[Metadata when writing to SQLite-backed Durable Object]
+All writes to a SQLite-backed Durable Object records nominal amounts of metadata, which counts towards your billable storage.
+
+The metadata remains until you call [`deleteAll()`](/durable-objects/api/storage-api/#deleteall) on the Durable Object.
+:::
