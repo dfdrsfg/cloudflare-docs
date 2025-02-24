@@ -1,5 +1,5 @@
 ---
-updated: 2025-02-17
+updated: 2025-02-24
 difficulty: Intermediate
 content_type: 📝 Tutorial
 pcx_content_type: tutorial
@@ -379,75 +379,17 @@ The `src/index.ts` file does the following:
 - Sends the data to your Pipeline.
 - Returns a response to the client.
 
-You now have a working application that sends clickstream data to your pipeline. In the next step, you will create a pipeline to receive the data.
+## 6. Deploy the application
 
-## 6. Ingest data to R2
+You can run the local server to the test the application. However, the data will be not be sent to the production pipeline. You will need to deploy the application to send the data to the pipeline.
 
-In this step, you will add the `Pipeline ID` as a secret to your project.
-
-Create a `.dev.vars` file in the root of your project and add the following environment variables:
-
-```text title=".dev.vars"
-PIPELINES_ID=<PIPELINES_ID>
-```
-
-Replace `<PIPELINES_ID>` with the ID of your pipeline from the previous step.
-
-Next, update the types in the `worker-configuration.d.ts` file:
-
-```ts title="worker-configuration.d.ts"
-interface Env {
-	PIPELINES_ID: string;
-}
-```
-
-The `fetch` handler in the `src/index.ts` file uses the `PIPELINES_ID` environment variable to send the clickstream data to your pipeline.
-
-## 7. Test the application
-
-Start the development server and navigate to the URL:
+To start the development server execute the below command and naviagte to `http://localhost:8787`:
 
 ```sh
 npm run dev
 ```
 
-When you click on the `View Details` or the `Add to Cart` button, the `handleClick` function calls the `/api/clickstream` endpoint to send the clickstream data to your pipeline.
-
-## 8. Connect the R2 bucket to MotherDuck
-
-Your application sends clickstream data to the R2 bucket using pipelines. In this step, you will connect the R2 bucket to MotherDuck.
-
-You can connect the bucket to MotherDuck in several ways, which you can learn about from the [MotherDuck documentation](https://motherduck.com/docs/integrations/cloud-storage/cloudflare-r2/). In this tutorial, you will connect the bucket to MotherDuck using the MotherDuck dashboard.
-
-1. Log in to the MotherDuck dashboard and select your profile.
-2. Navigate to the **Secrets** page.
-3. Select the **Add Secret** button and enter the following information:
-
-   - **Secret Name**: `Clickstream pipeline`
-   - **Secret Type**: `Cloudflare R2`
-   - **Access Key ID**: `ACCESS_KEY_ID` (replace with the Access Key ID you obtained in the previous step)
-   - **Secret Access Key**: `SECRET_ACCESS_KEY` (replace with the Secret Access Key you obtained in the previous step)
-
-4. Select the **Add Secret** button to save the secret.
-
-## 9. Query the data
-
-In this step, you will query the data stored in the R2 bucket using MotherDuck.
-
-1. Navigate back to the MotherDuck dashboard and select the **+** icon to add a new Notebook.
-2. Select the **Add Cell** button to add a new cell to the notebook.
-
-3. In the cell, enter the following query and select the **Run** button to execute the query:
-
-```sql
-SELECT * FROM read_json_auto('r2://<BUCKET_NAME>/**/*');
-```
-
-Replace the `<BUCKET_NAME>` placeholder with the name of the R2 bucket.
-
-The query will return the data stored in the R2 bucket.
-
-## 10. Deploy the application
+When you click on the `View Details` or the `Add to Cart` button, the `handleClick` function calls the `/api/clickstream` endpoint. This endpoint uses the pipelines bindinding and sends the clickstream data. Note that no actual data is sent to the pipeline when running the application locally.
 
 To deploy the application, run the following command:
 
@@ -473,15 +415,43 @@ Deployed e-commerce-clickstream triggers (7.60 sec)
 Current Version ID: <VERSION_ID>
 ```
 
-Next, add the `PIPELINES_ID` secret to the project:
+You can access the application at the URL provided in the output of the command. Now when you click on the `View Details` or `Add to Cart` button, the clickstream data will be sent to your pipeline.
 
-```sh
-npx wrangler secret put PIPELINES_ID
+## 7. Connect the R2 bucket to MotherDuck
+
+Your application sends clickstream data to the R2 bucket using pipelines. In this step, you will connect the R2 bucket to MotherDuck.
+
+You can connect the bucket to MotherDuck in several ways, which you can learn about from the [MotherDuck documentation](https://motherduck.com/docs/integrations/cloud-storage/cloudflare-r2/). In this tutorial, you will connect the bucket to MotherDuck using the MotherDuck dashboard.
+
+Before connecting the bucket to MotherDuck, you need to obtain the Access Key ID and Secret Access Key for the R2 bucket. You can find the instructions to obtain the keys in the [R2 documentation](/r2/api/s3/tokens).
+
+1. Log in to the MotherDuck dashboard and select your profile.
+2. Navigate to the **Secrets** page.
+3. Select the **Add Secret** button and enter the following information:
+
+   - **Secret Name**: `Clickstream pipeline`
+   - **Secret Type**: `Cloudflare R2`
+   - **Access Key ID**: `ACCESS_KEY_ID` (replace with the Access Key ID)
+   - **Secret Access Key**: `SECRET_ACCESS_KEY` (replace with the Secret Access Key)
+
+4. Select the **Add Secret** button to save the secret.
+
+## 8. Query the data
+
+In this step, you will query the data stored in the R2 bucket using MotherDuck.
+
+1. Navigate back to the MotherDuck dashboard and select the **+** icon to add a new Notebook.
+2. Select the **Add Cell** button to add a new cell to the notebook.
+
+3. In the cell, enter the following query and select the **Run** button to execute the query:
+
+```sql
+SELECT * FROM read_json_auto('r2://<BUCKET_NAME>/**/*');
 ```
 
-Enter the `PIPELINES_ID` value when prompted.
+Replace the `<BUCKET_NAME>` placeholder with the name of the R2 bucket.
 
-You can access the application at the URL provided in the output of the command.
+The query will return the data stored in the R2 bucket.
 
 ## Conclusion
 
