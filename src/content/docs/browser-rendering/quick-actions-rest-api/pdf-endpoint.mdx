@@ -22,6 +22,8 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-
   --output "output.pdf"
 ```
 
+## Advanced usage
+
 ```bash
 curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/pdf' \
   -H 'Authorization: Bearer <apiToken>' \
@@ -42,4 +44,20 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-
     }
   }' \
   --output "advanced-output.pdf"
+```
+
+## PDF with no images or CSS
+
+This is ideal when the user wants to so speed up the scanning process and does not need the images.
+
+```bash
+curl -X POST https://api.cloudflare.com/client/v4/accounts/<acccountID>/browser-rendering/pdf \
+  -H 'Authorization: Bearer <apiToken>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "url": "https://cloudflare.com/",
+  "rejectResourceTypes": ["image"],
+  "rejectRequestPattern": ["/^.*\\.(css)"]
+}' \
+  --output "cloudflare.pdf"
 ```
