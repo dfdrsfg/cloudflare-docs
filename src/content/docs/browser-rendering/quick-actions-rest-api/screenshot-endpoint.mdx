@@ -1,14 +1,16 @@
 ---
 pcx_content_type: how-to
-title: Render HTML and capture screenshot
+title: Screenshot API
 sidebar:
   order: 3
 ---
 
 This endpoint renders the webpage by processing its HTML and JavaScript, then captures a screenshot of the fully rendered page.
 
-```
-curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/screenshot' \
+## Basic usage
+
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/screenshot' \
   -H 'Authorization: Bearer <apiToken>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -19,4 +21,30 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser
     }
   }' \
   --output "screenshot.webp"
+```
+
+## Advanced usage
+
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/screenshot' \
+  -H 'Authorization: Bearer <apiToken>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "url": "https://example.com/",
+    "html": "<html><body><h1>Advanced Screenshot</h1></body></html>",
+    "screenshotOptions": {
+      "type": "webp",
+      "omitBackground": true,
+      "quality": 80
+    },
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "gotoOptions": {
+      "waitUntil": "networkidle0",
+      "timeout": 45000
+    }
+  }' \
+  --output "advanced-screenshot.webp"
 ```
