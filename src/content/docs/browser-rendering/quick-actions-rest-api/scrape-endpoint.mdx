@@ -14,11 +14,7 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-
   -H 'Authorization: Bearer <apiToken>' \
   -H 'Content-Type: application/json' \
   -d '{
-    "url": "https://example.com/",
-    "scrapeOptions": {
-      "selectors": ["h1", ".article"]
-    }
-  }'
+ { "url": "https://example.com", "elements": [ { "selector": "h1" }, { "selector": "a" } ] }
 ```
 
 ### JSON response
