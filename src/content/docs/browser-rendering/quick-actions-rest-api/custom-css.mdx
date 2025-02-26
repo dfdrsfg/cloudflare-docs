@@ -7,8 +7,10 @@ sidebar:
 
 This endpoint lets you inject CSS into the page before capturing a screenshot, allowing control over the rendering process and enabling tailored visual adjustments.
 
-```
-curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/screenshot' \
+## Basic usage
+
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/screenshot' \
   -H 'Authorization: Bearer <apiToken>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -27,4 +29,28 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser
     ]
   }' \
   --output "screenshot.webp"
+```
+
+## Advanced usage
+
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/screenshot' \
+  -H 'Authorization: Bearer <apiToken>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "url": "https://example.com/",
+    "addScriptTag": [
+      { "url": "https://code.jquery.com/jquery-3.7.1.min.js" },
+      { "content": "document.querySelector(`h1`).innerText = `Hello World!!!`" }
+    ],
+    "addStyleTag": [
+      { "content": "body { background: linear-gradient(45deg, #da5a44, #a32784); }" },
+      { "url": "https://interactive-examples.mdn.mozilla.net/live-examples/css-examples/text-decoration/text-decoration-color.css" }
+    ],
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    }
+  }' \
+  --output "advanced-custom-screenshot.webp"
 ```

@@ -7,8 +7,10 @@ sidebar:
 
 The PDF API navigates to a site and converts the rendered page into a PDF document, returning a `Content-Type: application/pdf` response along with a PDF buffer.
 
-```
-curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/pdf' \
+## Basic usage
+
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/pdf' \
   -H 'Authorization: Bearer <apiToken>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -18,4 +20,26 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser
     ]
   }' \
   --output "output.pdf"
+```
+
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/pdf' \
+  -H 'Authorization: Bearer <apiToken>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "url": "https://example.com/",
+    "html": "<html><body>PDF Advanced Rendering</body></html>",
+    "setExtraHTTPHeaders": {
+      "X-Custom-Header": "value"
+    },
+    "viewport": {
+      "width": 1200,
+      "height": 800
+    },
+    "gotoOptions": {
+      "waitUntil": "networkidle2",
+      "timeout": 45000
+    }
+  }' \
+  --output "advanced-output.pdf"
 ```

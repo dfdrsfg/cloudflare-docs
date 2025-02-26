@@ -7,8 +7,10 @@ sidebar:
 
 The snapshot API captures both the HTML content and a screenshot of the webpage in one request. It returns the HTML as a text string and the screenshot as a Base64-encoded image.
 
-```
-curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/snapshot' \
+## Basic usage
+
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/snapshot' \
   -H 'Authorization: Bearer <apiToken>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -17,4 +19,49 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser
       { "content": "document.title = \"Snapshot Page\";" }
     ]
   }'
+```
+
+### json response
+
+```json title="json response"
+{
+	"status": true,
+	"errors": [],
+	"result": {
+		"screenshot": "Base64EncodedScreenshotString",
+		"content": "<html>...</html>"
+	}
+}
+```
+
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/snapshot' \
+  -H 'Authorization: Bearer <apiToken>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "url": "https://example.com/",
+    "html": "<html><body>Advanced Snapshot</body></html>",
+    "setJavaScriptEnabled": false,
+    "viewport": {
+      "width": 1200,
+      "height": 800
+    },
+    "gotoOptions": {
+      "waitUntil": "domcontentloaded",
+      "timeout": 30000
+    }
+  }'
+```
+
+### json response
+
+```json title="json response"
+{
+	"status": true,
+	"errors": [],
+	"result": {
+		"screenshot": "AdvancedBase64Screenshot",
+		"content": "<html><body>Advanced Snapshot</body></html>"
+	}
+}
 ```

@@ -5,10 +5,12 @@ sidebar:
   order: 7
 ---
 
-The scrape API extracts structured data from specific elements on a webpage using CSS selectors, returning details such as element dimensions and inner HTML for efficient data extraction
+The scrape API extracts structured data from specific elements on a webpage using CSS selectors, returning details such as element dimensions and inner HTML for efficient data extraction.
 
-```
-curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/scrape' \
+## Basic usage
+
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/scrape' \
   -H 'Authorization: Bearer <apiToken>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -17,4 +19,79 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser
       "selectors": ["h1", ".article"]
     }
   }'
+```
+
+### json response
+
+```json title="json response"
+{
+	"status": true,
+	"errors": [],
+	"result": {
+		"elements": [
+			{
+				"selector": "h1",
+				"height": 50,
+				"html": "<h1>Example Heading</h1>"
+			},
+			{
+				"selector": ".article",
+				"height": 150,
+				"html": "<div class=\"article\">Content here</div>"
+			}
+		]
+	}
+}
+```
+
+## Advanced usage
+
+```bash
+curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/scrape' \
+  -H 'Authorization: Bearer <apiToken>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "url": "https://example.com/",
+    "html": "<html><body><h1>Advanced Scrape</h1></body></html>",
+    "setJavaScriptEnabled": false,
+    "viewport": {
+      "width": 1200,
+      "height": 800
+    },
+    "gotoOptions": {
+      "waitUntil": "networkidle0",
+      "timeout": 45000
+    },
+    "scrapeOptions": {
+      "selectors": ["h1", ".article", "p"]
+    }
+  }'
+```
+
+### json response
+
+```json title="json response"
+{
+	"status": true,
+	"errors": [],
+	"result": {
+		"elements": [
+			{
+				"selector": "h1",
+				"height": 60,
+				"html": "<h1>Advanced Scrape Heading</h1>"
+			},
+			{
+				"selector": ".article",
+				"height": 200,
+				"html": "<div class=\"article\">Advanced content</div>"
+			},
+			{
+				"selector": "p",
+				"height": 80,
+				"html": "<p>Paragraph content</p>"
+			}
+		]
+	}
+}
 ```
