@@ -1,6 +1,6 @@
 ---
 pcx_content_type: how-to
-title: content API
+title: Content API
 sidebar:
   order: 2
 ---
@@ -23,14 +23,9 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-
   -H 'Authorization: Bearer <apiToken>' \
   -H 'Content-Type: application/json' \
   -d '{
-    "html": "<html><body>Hello World</body></html>",
-    "setJavaScriptEnabled": false,
-    "viewport": {
-      "width": 1200,
-      "height": 800
-    },
-    "allowRequestPattern": [
-      "https?://fonts.(googleapis|gstatic).com.*"
-    ]
-  }'
+      "url": "https://cloudflare.com/",
+  "rejectResourceTypes": ["image"],
+  "rejectRequestPattern": ["/^.*\\.(css)"]
+}
+
 ```
