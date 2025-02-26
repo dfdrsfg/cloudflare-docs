@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-- The content API navigates to a website and captures the page’s complete HTML including the `<head>` section after it has been rendered, returning a `Content-Type: text/html` response. This is ideal for pages with dynamic JavaScript or heavy interactivity.
+The content API navigates to a website and captures the complete HTML of a page including the `<head>` section after it has been rendered, returning a `Content-Type: text/html` response. This is ideal for pages with dynamic JavaScript or heavy interactivity.
 
 ```
 curl -X 'POST' 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/content' \

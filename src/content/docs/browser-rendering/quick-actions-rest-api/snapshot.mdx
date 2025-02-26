@@ -5,6 +5,8 @@ sidebar:
   order: 6
 ---
 
+The snapshot API captures both the HTML content and a screenshot of the webpage in one request. It returns the HTML as a text string and the screenshot as a Base64-encoded image.
+
 ```
 curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/snapshot' \
   -H 'Authorization: Bearer <apiToken>' \

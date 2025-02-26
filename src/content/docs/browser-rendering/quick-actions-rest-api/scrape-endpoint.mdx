@@ -5,6 +5,8 @@ sidebar:
   order: 7
 ---
 
+The scrape API extracts structured data from specific elements on a webpage using CSS selectors, returning details such as element dimensions and inner HTML for efficient data extraction
+
 ```
 curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountTag>/browser-rendering/scrape' \
   -H 'Authorization: Bearer <apiToken>' \
