@@ -16,7 +16,7 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-
   -d '{
     "url": "https://example.com/",
     "addScriptTag": [
-      { "content": "document.title = \"Snapshot Page\";" }
+      { "content": "document.body.innerHTML = "Snapshot Page";" }
     ]
   }'
 ```
@@ -34,12 +34,13 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-
 }
 ```
 
+## Advanced usage
+
 ```bash
 curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/snapshot' \
   -H 'Authorization: Bearer <apiToken>' \
   -H 'Content-Type: application/json' \
   -d '{
-    "url": "https://example.com/",
     "html": "<html><body>Advanced Snapshot</body></html>",
     "setJavaScriptEnabled": false,
     "viewport": {
