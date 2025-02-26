@@ -120,14 +120,14 @@ export async function getOgImage(entry: CollectionEntry<"docs" | "changelog">) {
 		return image.src;
 	}
 
+	if (entry.collection === "changelog") {
+		return CHANGELOG_OG_IMAGE;
+	}
+
 	const section = entry.id.split("/").filter(Boolean).at(0);
 
 	if (!section) {
 		return DEFAULT_OG_IMAGE;
-	}
-
-	if (section === "changelog") {
-		return CHANGELOG_OG_IMAGE;
 	}
 
 	const product = await getEntry("products", section);
