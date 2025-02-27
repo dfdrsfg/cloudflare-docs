@@ -32,9 +32,9 @@ Using WebSockets with Durable Objects with the [`isolatedStorage`](/workers/test
 
 ### Isolated storage
 
-When the `isolatedStorage` flag is enabled (the default), the test runner will undo any writes to the storage at the end of the test as detailed in the [Isolation and concurrency docs](/workers/testing/vitest-integration/isolation-and-concurrency/). However, you must manage resources carefully. Below are some common pitfalls and how to avoid them:
+When the `isolatedStorage` flag is enabled (the default), the test runner will undo any writes to the storage at the end of the test as detailed in the [isolation and concurrency documentation](/workers/testing/vitest-integration/isolation-and-concurrency/). However, Cloudflare recommends that you consider the following actions to avoid any common issues:
 
-- Await all storage operations
+## Await all storage operations
 
 Always `await` all `Promise`s that read or write to storage services.
 
@@ -46,17 +46,17 @@ beforeAll(async () => {
 });
 ```
 
-- Explicit resource disposal
+## Explicitly signal resource disposal
 
-When calling RPC methods of a Service Worker or Durable Object that return non-primitive values (such as objects or classes extending `RpcTarget`), use the `using` keyword to explicitly signal when resources can be disposed. See [this example test](https://github.com/cloudflare/workers-sdk/tree/main/fixtures/vitest-pool-workers-examples/rpc/test/unit.test.ts#L155) and refer to [explicit-resource-management](/workers/runtime-apis/rpc/lifecycle#explicit-resource-management) for more details.
+When calling RPC methods of a Service Worker or Durable Object that return non-primitive values (such as objects or classes extending `RpcTarget`), use the `using` keyword to explicitly signal when resources can be disposed of. See [this example test](https://github.com/cloudflare/workers-sdk/tree/main/fixtures/vitest-pool-workers-examples/rpc/test/unit.test.ts#L155) and refer to [explicit-resource-management](/workers/runtime-apis/rpc/lifecycle#explicit-resource-management) for more details.
 
 ```ts
 using result = await stub.getCounter();
 ```
 
-- Consume response bodies
+## Consume response bodies
 
-When making requests via `fetch` or `R2.get()`, consume the entire response body, even if you aren't asserting its content. For example:
+When making requests via `fetch` or `R2.get()`, consume the entire response body, even if you are not asserting its content. For example:
 
 ```ts 
 test('check if file exists', async () => {
