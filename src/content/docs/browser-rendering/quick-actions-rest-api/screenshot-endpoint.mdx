@@ -32,9 +32,7 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-
   -d '{
     "url": "https://cloudflare.com/",
     "screenshotOptions": {
-      "type": "webp",
       "omitBackground": true,
-      "quality": 80
     },
     "viewport": {
       "width": 1280,
@@ -77,9 +75,7 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-
 - `url` _(string)_ - The webpage URL to take a screenshot of.
 - `html` _(string)_ - Instead of a URL, allows rendering custom HTML for the screenshot.
 - `screenshotOptions` _(object)_ - Configures the screenshot format and quality.
-  - `type` _(string)_ - Defines the image format (`jpeg`, `png`, `webp`).
   - `omitBackground` _(boolean)_ - Removes the default white background when taking a screenshot.
-  - `quality` _(number)_ - (For JPEG/WebP) Compression quality from 0 to 100\.
 - `viewport` _(object)_ - Sets the browser viewport dimensions for rendering.
   - `width` _(number)_ - Viewport width in pixels.
   - `height` _(number)_ - Viewport height in pixels.
