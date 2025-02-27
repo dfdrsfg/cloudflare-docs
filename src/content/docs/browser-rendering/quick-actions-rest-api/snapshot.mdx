@@ -38,6 +38,8 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-
 
 ## Advanced usage
 
+Sets the HTML content of the page, disables JavaScript, changes the page size (`viewport`) and waits up to `30000ms` or until the `DOMContentLoaded` event fires. Then, returns the rendered HTML content and a base-64 encoded screenshot of the page.
+
 ```bash
 curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-rendering/snapshot' \
   -H 'Authorization: Bearer <apiToken>' \
